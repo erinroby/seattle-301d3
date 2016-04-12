@@ -32,7 +32,7 @@ articleView.handleAuthorFilter = function() {
       $('article').hide();
       var $selectedAuthor = $('article[data-author="' + $(this).val() + '"]');
       $selectedAuthor.show();
-      // TODO: If the select box was changed to an option that has a value, we need to:
+      // TO-DO: If the select box was changed to an option that has a value, we need to:
       //       1. Hide all the articles,
       //       2. Show just the ones that match for the author that was selected.
       //          Use an "attribute selector" to find those articles that match the value,
@@ -40,17 +40,27 @@ articleView.handleAuthorFilter = function() {
 
     } else {
       $('article:not(.template)').show();
-      // TODO: If the select box was changed to an option that is blank, we should:
+      // TO-DO: If the select box was changed to an option that is blank, we should:
       //       1. Show all the articles,
       //       2. Except the one article we are using as a template.
 
     }
-    $('#author-filter').val('');
+    $('#category-filter').val('');
   });
 };
 
 articleView.handleCategoryFilter = function() {
-  // TODO: Just like we do for #author-filter above, we should handle change events on the #category-filter element.
+  $('#category-filter').on('change', function(){
+    if ($(this).val()) {
+      $('article').hide();
+      var $selectedCategory = $('article[data-category="' + $(this).val() + '"]');
+      $selectedCategory.show();
+    } else {
+      $('article:not(.template)').show();
+    }
+    $('#author-filter').val('');
+  });
+  // TO-DO: Just like we do for #author-filter above, we should handle change events on the #category-filter element.
   //       When an option with a value is selected, hide all the articles, then reveal the matches.
   //       When the blank (default) option is selected, show all the articles, except for the template.
   //       Be sure to reset the #author-filter while you are at it!
@@ -58,29 +68,43 @@ articleView.handleCategoryFilter = function() {
 };
 
 articleView.handleMainNav = function() {
-  // TODO: Add an event handler to .main-nav element that will power the Tabs feature.
+
+  // TO-DO: Add an event handler to .main-nav element that will power the Tabs feature.
   //       Clicking any .tab element should hide all the .tab-content sections, and then reveal the
   //       single .tab-content section that is associated with the clicked .tab element.
   //       So: You need to dynamically build a selector string with the correct ID, based on the
   //       data available to you on the .tab element that was clicked.
-  $('.main-nav').on(/* CODE GOES HERE */); //this is going to require event delegation. ER
+  $('.main-nav').on('click', '.tab', function(){
+    $('.tab-content').hide();
+    var $selectedTab = $(this).attr('data-content');
+    $('#' + $selectedTab).show();
+  });
 
-  $('.main-nav .tab:first').click(); //Let's now trigger a click on the first .tab element, to set up the page. //triggers event on element. ER
+  $('.main-nav .tab:first').click(); //Let's now trigger a click on the first .tab element, to set up the page.
 };
 
 articleView.setTeasers = function() { //require finding the children elements. Only show the first paragraph. Maybe but a read less link, too. Super stretch goal!
   $('.article-body *:nth-of-type(n+2)').hide(); // Hide elements beyond the first 2 in any artcile body.
 
-  // TODO: Add an event handler to reveal all the hidden elements,
+  // TO-DO: Add an event handler to reveal all the hidden elements,
   //       when the .read-on link is clicked. You can go ahead and hide the
   //       "Read On" link once it has been clicked. Be sure to prevent the default link-click action!
   //       Ideally, we'd attach this as just 1 event handler on the #articles section, and let it
   //       process any .read-on clicks that happen within child nodes.
 
+  $('article').on('click', '.read-on', function(e){
+    e.preventDefault();
+    var sibling = $(this).siblings();
+    sibling.children().show();
+    $(this).hide();
+  });
 };
 
-// TODO: Call all of the above functions, once we are sure the DOM is ready. use document.ready(); ER
+// TO-DO: Call all of the above functions, once we are sure the DOM is ready. use document.ready(); ER
 $(document).ready(function() {
   articleView.populateFilters();
   articleView.handleAuthorFilter();
+  articleView.handleCategoryFilter();
+  articleView.handleMainNav();
+  articleView.setTeasers();
 });
