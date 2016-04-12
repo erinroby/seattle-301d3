@@ -2,7 +2,7 @@
 var articleView = {};
 
 articleView.populateFilters = function() {
-  $('article').each(function() {
+  $('article').each(function() { //iterate over each item doing something against it. ER
     if (!$(this).hasClass('template')) {
       // DONE: We need to take every author name from the page, and make it an option in the Author filter.
       //       To do so, Build an `option` DOM element that we can append to the author select box.
@@ -18,9 +18,9 @@ articleView.populateFilters = function() {
       //       Avoid duplicates! We don't want to append the category name if the select
       //       already has this category as an option!
       val = $(this).attr('data-category');
-      optionTag = '<option value="' + val + '">' + val + '</option>';
+      optionTag = '<option value="' + val + '">' + val + '</option>'; //note the double and single quotes here. ER
       if ($('#category-filter option[value="' + val + '"]').length === 0) {
-        $('#category-filter').append(optionTag);
+        $('#category-filter').append(optionTag); //now our data is dynamic. ER
       }
     }
   });
@@ -29,6 +29,9 @@ articleView.populateFilters = function() {
 articleView.handleAuthorFilter = function() {
   $('#author-filter').on('change', function() {
     if ($(this).val()) {
+      $('article').hide();
+      var $selectedAuthor = $('article[data-author="' + $(this).val() + '"]');
+      $selectedAuthor.show();
       // TODO: If the select box was changed to an option that has a value, we need to:
       //       1. Hide all the articles,
       //       2. Show just the ones that match for the author that was selected.
@@ -36,12 +39,13 @@ articleView.handleAuthorFilter = function() {
       //          and fade them in for the reader.
 
     } else {
+      $('article:not(.template)').show();
       // TODO: If the select box was changed to an option that is blank, we should:
       //       1. Show all the articles,
       //       2. Except the one article we are using as a template.
 
     }
-    $('#category-filter').val('');
+    $('#author-filter').val('');
   });
 };
 
@@ -59,12 +63,12 @@ articleView.handleMainNav = function() {
   //       single .tab-content section that is associated with the clicked .tab element.
   //       So: You need to dynamically build a selector string with the correct ID, based on the
   //       data available to you on the .tab element that was clicked.
-  $('.main-nav').on(/* CODE GOES HERE */);
+  $('.main-nav').on(/* CODE GOES HERE */); //this is going to require event delegation. ER
 
-  $('.main-nav .tab:first').click(); // Let's now trigger a click on the first .tab element, to set up the page.
+  $('.main-nav .tab:first').click(); //Let's now trigger a click on the first .tab element, to set up the page. //triggers event on element. ER
 };
 
-articleView.setTeasers = function() {
+articleView.setTeasers = function() { //require finding the children elements. Only show the first paragraph. Maybe but a read less link, too. Super stretch goal!
   $('.article-body *:nth-of-type(n+2)').hide(); // Hide elements beyond the first 2 in any artcile body.
 
   // TODO: Add an event handler to reveal all the hidden elements,
@@ -75,5 +79,8 @@ articleView.setTeasers = function() {
 
 };
 
-// TODO: Call all of the above functions, once we are sure the DOM is ready.
-$();
+// TODO: Call all of the above functions, once we are sure the DOM is ready. use document.ready(); ER
+$(document).ready(function() {
+  articleView.populateFilters();
+  articleView.handleAuthorFilter();
+});
