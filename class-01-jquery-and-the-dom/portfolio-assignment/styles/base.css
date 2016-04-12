@@ -1,0 +1,23 @@
+body {
+  text-align: center;
+  font-family: 'Open Sans', sans-serif;
+  margin: 10%;
+}
+
+ul {
+  padding: 0px;
+}
+
+li {
+  display: inline;
+  align-content: center;
+  padding: 2px;
+}
+
+time {
+  font-style: italic;
+}
+
+.projectTitle {
+  font-size: 1.5em;
+}
