@@ -12,7 +12,7 @@ function Article (opts) {
 // objects, which means we can add properties/values to them at any time. In this case, we have
 // a key/value pair to track, that relates to ALL of the Article objects, so it does not belong on
 // the prototype, as that would only be relevant to a single instantiated Article.
-Article.all = [];
+Article.all = []; //no .prototype here -- note that.
 
 Article.prototype.toHtml = function() {
   var template = Handlebars.compile($('#article-template').text());
@@ -48,20 +48,25 @@ Article.fetchAll = function() {
     // When our data is already in localStorage,
     // we can load it by calling the .loadAll() method,
     // and then render the index page (using the proper method on the articleView object).
-    Article.loadAll(//TODO: What do we pass in here to the .loadAll() method? Be careful
+    Article.loadAll(JSON.parse(localStorage.articleRawData)//ParseInt here?
+      //TODO: What do we pass in here to the .loadAll() method? Be careful
       // when handling different data types between here and localStorage!
+      // previous we were passing in the rawData from the arrays
+      //.stringify() and .parse() -- IOW, it's coming in on as a string and where you're passing it doesn't take a string.
+      //this is termed call stack. two types of memory: stack memory and heat memeory. stack is the memory that is dedicated to the app that you're currently using.
     );
-    articleView.someFunctionToCall//(); //TODO: Change this fake method call to the correct
+    articleView.initIndexPage(); //TODO: Change this fake method call to the correct
     // one that will render the index page.
   } else {
     // TODO: When we don't already have our data, we need to:
-    // 1. Retrieve the JSON file from the server with AJAX (which jQuery method is best for this?),
+    // 1. Retrieve the JSON file from the server with AJAX (which jQuery method is best for this?), //getJSON()
 
-    // 2. Store the resulting JSON data with the .loadAll method,
 
-    // 3. Cache it in localStorage so we can skip the server call next time,
+    // 2. Store the resulting JSON data with the .loadAll method, //see above
 
-    // 4. And then render the index page (perhaps with an articleView method?).
+    // 3. Cache it in localStorage so we can skip the server call next time, //then it will run the other half of this conditional.
+
+    // 4. And then render the index page (perhaps with an articleView method?). //the articleView page here, there is a bunch of hard coded stuff.
 
   }
 }
