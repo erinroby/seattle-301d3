@@ -88,7 +88,7 @@
 
   // If the DB has data already, we'll load up the data (by descended published order), and then hand off control to the View.
   // If the DB is empty, we need to retrieve the JSON and process it.
-  Article.fetchAll = function(next) {
+  Article.fetchAll = function(next) { //
     webDB.execute('SELECT * FROM articleTable', function(rows) { // DONE: fill these quotes to 'select' our table.
       if (rows.length) {
         Article.loadAll(rows);
@@ -100,7 +100,7 @@
       } else {
         $.getJSON('/data/hackerIpsum.json', function(data) {
           // Article.loadAll(data);
-          localStorage.hackerIpsum = JSON.stringify(data);
+          // localStorage.hackerIpsum = JSON.stringify(data);
           // Save each article from this JSON file, so we don't need to request it next time:
           data.forEach(function(obj) {
             var article = new Article(obj); // This will instantiate an article instance based on each article object from our JSON.
