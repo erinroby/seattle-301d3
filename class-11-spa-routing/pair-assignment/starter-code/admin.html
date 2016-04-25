@@ -9,11 +9,10 @@
     <link rel="stylesheet" href="/styles/base.css">
     <link rel="stylesheet" href="/styles/layout.css">
     <link rel="stylesheet" href="/styles/modules.css">
-    <!-- DONE: Setup a template for each row of the Author Stats section of this page: -->
+    </head>
     <script id="author-template" type="text/x-handlebars-template">
       <li><strong>{{name}}</strong>: {{numWords}} words written</li>
     </script>
-    </head>
   <body>
     <header class="site-header clearfix">
       <section class="heading-group-h1 pull-left">
@@ -39,7 +38,6 @@
         <h2>Author Stats</h2>
         <p><em>Details on who is writing, and how much writing they are doing...</em></p>
         <ul class="author-stats">
-          <!-- DONE: Setup an unordered list to later append to with some stats for each author -->
         </ul>
       </section>
     </main>
@@ -52,8 +50,7 @@
     <script src="/scripts/article.js"></script>
     <script src="/scripts/articleView.js"></script>
     <script>
-      // TODO: After Article.fetchAll completes, what view function do we want to run next?
-      // Article.fetchAll(); // Pass in the correct view method here (higher order functions!).
+      Article.fetchAll(articleView.initAdminPage);
     </script>
   </body>
 </html>

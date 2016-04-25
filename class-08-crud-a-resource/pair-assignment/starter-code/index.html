@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="styles/base.css">
     <link rel="stylesheet" href="styles/layout.css">
     <link rel="stylesheet" href="styles/modules.css">
+    <link rel='icon' type='image/x-icon' href='/vendor/codefellows.png'>
 
     <script id="article-template" type="text/x-handlebars-template">
       <article class="clearfix" data-author="{{author}}" data-category="{{category}}">
@@ -74,18 +75,21 @@
       </section>
     </main>
     <footer>
-      &copy; 2016 Code Fellows | Static Blog | Happy Ipsum!
+      &copy; 2015 Code Fellows | Static Blog | Happy Ipsum!
     </footer>
 
     <script src="/vendor/scripts/jquery-2.1.4.js"></script>
     <script src="/vendor/scripts/handlebars.js"></script>
     <script src="/vendor/scripts/marked.js"></script>
+    <!-- DONE: Include the script files we need, that give us an API to the WebSQL feature of Chrome: -->
+    <script src="/vendor/scripts/html5sql.js"></script>
+    <script src="/vendor/scripts/webdb.js"></script>
     <script src="/scripts/article.js"></script>
     <script src="/scripts/articleView.js"></script>
     <script>
-      // TODO: The Article.fetchAll() method call now requires a callback.
-      // What 'view' method do we want to run on this index.html page?
-      // Article.fetchAll(); // Pass in the correct view method here.
+      // DONE: Ensure that a database table for articles exists, every time we load the page.
+      Article.createTable();
+      Article.fetchAll(articleView.initIndexPage);
     </script>
   </body>
 </html>
