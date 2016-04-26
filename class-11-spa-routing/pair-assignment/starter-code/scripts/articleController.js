@@ -3,7 +3,7 @@
 
   // DONE: Create the `articles` table when the controller first loads,
   //  with the code that used to be in index.html:
-Article.createTable();
+  Article.createTable();
 
   articlesController.index = function() {
     // DONE: Complete this function that kicks off the fetching and rendering
