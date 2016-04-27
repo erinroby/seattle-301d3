@@ -7,16 +7,6 @@
 
   Article.all = [];
 
-  Article.prototype.toHtml = function() {
-    var template = Handlebars.compile($('#article-template').text());
-
-    this.daysAgo = parseInt((new Date() - new Date(this.publishedOn))/60/60/24/1000);
-    this.publishStatus = this.publishedOn ? 'published ' + this.daysAgo + ' days ago' : '(draft)';
-    this.body = marked(this.body);
-
-    return template(this);
-  };
-
   Article.createTable = function(callback) {
     webDB.execute(
       'CREATE TABLE IF NOT EXISTS articles (' +
@@ -27,13 +17,8 @@
         'category VARCHAR(20), ' +
         'publishedOn DATETIME, ' +
         'body TEXT NOT NULL);',
-<<<<<<< HEAD
       function(result) {
         console.log('Successfully set up the articles table.', result);
-=======
-      function() {
-        console.log('Successfully set up the articles table.');
->>>>>>> d081f7cee5d9bb6f92f190f5848760146c7bbddb
         if (callback) callback();
       }
     );
@@ -150,7 +135,7 @@
   Article.stats = function() {
     return {
       numArticles: Article.all.length,
-      numWords: Article.numwordsAll(),
+      numWords: Article.numwords(),
       Authors: Article.allAuthors(),
     };
   };

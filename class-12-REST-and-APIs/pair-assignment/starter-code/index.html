@@ -24,6 +24,24 @@
         <a href="#" class="read-on">Read on &rarr;</a>
       </article>
     </script>
+
+    <script id="author-template" type="text/x-handlebars-template">
+      <li><strong>{{name}}</strong>: {{numWords}} words written</li>
+    </script>
+
+    <!-- TODO: We have a new Handlebars template! Help fill in a few expressions: -->
+    <script id="repo-template" type="text/x-handlebars-template">
+      <li>
+        <a href="{{html_url}}" target="_blank"><h3>{{name}}</h3></a>
+        <p>Description: {{}}</p>
+        <p>Language: {{}}</p>
+        <p>Created: {{}}</p>
+        <p>Last updated: {{updated_at}}</p>
+        {{#if watchers_count}}
+          <p>{{watchers_count}} watching this repo</p>
+        {{/if}}
+      </li>
+    </script>
   </head>
   <body>
     <header class="site-header clearfix">
@@ -38,6 +56,7 @@
         <ul>
           <li class="tab" data-content="articles"><a href="/" class="icon-home"> Home</a></li>
           <li class="tab" data-content="about"><a href="/about" class="icon-address-book"> About</a></li>
+          <li class="tab" data-content="admin"><a href="/admin" class="icon-rocket">Admin</a></li>
           <li><a href="http://twitter.com/codefellowsSEA" target="_blank" class="icon-twitter3"> Twitter</a></li>
           <li><a href="http://github.com/" target="_blank" class="icon-github"> GitHub</a></li>
         </ul>
@@ -65,60 +84,48 @@
           Welcome to my Blog
         </header>
         <section>
-<<<<<<< HEAD
-          <h1>Some of my interests:</h1>
-=======
-          <h1>Some of my intrests:</h1>
->>>>>>> d081f7cee5d9bb6f92f190f5848760146c7bbddb
+          <h1>Check out my Projects on GitHub:</h1>
           <ul>
-            <li>Coding</li>
-            <li>Sharing what I've learned</li>
-            <li>Hanging with my family</li>
+            <li>Coding Projects Go Here</li>
           </ul>
         </section>
+      </section>
+      <section id="blog-stats">
+        <h1>Blog Stats</h1>
+        <dt>Total articles:</dt> <dd class="articles"></dd>
+        <dt>Total words:</dt> <dd class="words"></dd>
+        <h2>Author Stats</h2>
+        <p><em>Details on who is writing, and how much writing they are doing...</em></p>
+        <ul class="author-stats">
+        </ul>
       </section>
     </main>
     <footer>
       &copy; 2015 Code Fellows | Static Blog | Happy Ipsum!
     </footer>
-<<<<<<< HEAD
-    <!-- DONE: Be sure to include the routing functionality with the correct script files.
-=======
-    <!-- TODO: Be sure to include the routing functionality with the correct script files.
->>>>>>> d081f7cee5d9bb6f92f190f5848760146c7bbddb
-        Don't forget your controllers! Ensure the load order satisfies any dependencies: -->
 
+    <!-- Vendor files: -->
     <script src="/vendor/scripts/jquery-2.1.4.js"></script>
     <script src="/vendor/scripts/handlebars.js"></script>
     <script src="/vendor/scripts/marked.js"></script>
     <script src="/vendor/scripts/html5sql.js"></script>
     <script src="/vendor/scripts/webdb.js"></script>
-<<<<<<< HEAD
-<<<<<<< HEAD
     <script src="/vendor/scripts/page.js"></script>
-=======
-    <script src='/vendor/scripts/page.js'></script>
->>>>>>> 41809be678817ce31d95b84a22f623899a2395e6
 
-    <script src="/scripts/article.js"></script>
-    <script src="/scripts/articleView.js"></script>
-    <script src="/scripts/articleController.js"></script>
-    <script src="/scripts/aboutController.js"></script>
+    <!-- TODO: Include your secret GitHub token file, which should be gitingore'd,
+      therefore recreated in every developer's environment. -->
+
+    <!-- Model files: -->
+    <!-- TODO: Be sure to include any new model files: -->
+    <script src="/scripts/model/article.js"></script>
+    <!-- View files: -->
+    <!-- TODO: Be sure to include any new view files: -->
+    <script src="/scripts/view/articleView.js"></script>
+    <!-- Controller files: -->
+    <script src="/scripts/controllers/articleController.js"></script>
+    <script src="/scripts/controllers/aboutController.js"></script>
+    <script src="/scripts/controllers/adminController.js"></script>
+
     <script src="/scripts/routes.js"></script>
-
-    <!-- DONE: These function calls inside the script tag do not look great here. Why not place them where
-        they belong, in our brand new article controller?!: -->
-=======
-
-    <script src="/scripts/article.js"></script>
-    <script src="/scripts/articleView.js"></script>
-
-    <!-- TODO: These function calls inside the script tag do not look great here. Why not place them where
-        they belong, in our brand new article controller?!: -->
-    <script>
-      Article.createTable();
-      Article.fetchAll(articleView.initIndexPage);
-    </script>
->>>>>>> d081f7cee5d9bb6f92f190f5848760146c7bbddb
   </body>
 </html>
